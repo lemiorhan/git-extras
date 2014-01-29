@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat
 path = new File(".").getAbsolutePath()
 isDebug = false
 
-def cli = new CliBuilder(usage: 'GitObjectsAnalyzer.groovy [-p PATH] [-d] [-f FREQUENCY]')
+def cli = new CliBuilder(usage: 'GitAnalyzer.groovy [-p PATH] [-d]')
 detectArguments(cli, args)
 
 stats = [:]
