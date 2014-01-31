@@ -20,28 +20,28 @@ Just clone this repository to a folder (e.g. `/usr/local/bin`) which is in the l
 #### git-find-repos
 
 ```
-**NAME**
+NAME
       git-find-repos - Finds all existing git repositories
 
-**SYNOPSIS**
+SYNOPSIS
       git-find-repos [-h | --help] [-d | --dirty] <path>
 
-**DESCRIPTION**
+DESCRIPTION
       git-find-repos is a Bash script that searches .git folders recursively under the given folder path.
 
-**OPTIONS**
+OPTIONS
       <path>
           Path of a folder to run the recursive search. If it is not provided, th directory that you are in is used for
-          doing the search
+          doing the search.
       -d, --dirty
           Checks the status of detected git repositories. Whenever it finds a repository having updates that hasn't been
           push to upstream (these are the updates not added yet, the updates added but not committed yet, and the
           updates committed but not pushed yet), it marks the repository as dirty. With this option, only the dirty
           repositories are printed, not all of them.
       -h, --help
-          Prints usage information for help
+          Prints usage information for help.
 
-**USAGE**
+USAGE
       Typically you can search for all available git repositories. Do not provide the path if you want to search in
       your current directory.
 
@@ -54,7 +54,7 @@ Just clone this repository to a folder (e.g. `/usr/local/bin`) which is in the l
           git-find-repos -d /path/to/search
           git-find-repos --dirty /path/to/search
 
-**DISCUSSIONS**
+DISCUSSIONS
       We clone git repositories to our machines. We use many different source directories to clone into. For instance,
       sometimes we clone repositories to our home folder, sometimes to our `/usr/local/` folder. From time to
       time we lose track of what we changed in these repositories. This script is mainly designed for searching git
