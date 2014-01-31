@@ -42,23 +42,25 @@ SYNOPSIS
       git-find-repos [-h | --help] [-d | --dirty] <path>
 
 DESCRIPTION
-      git-find-repos is a Bash script that searches .git folders recursively under the given folder path.
+      git-find-repos is a Bash script that searches .git folders recursively under the given folder
+      path.
 
 OPTIONS
       <path>
-          Path of a folder to run the recursive search. If it is not provided, th directory that you are in is used for
-          doing the search.
+          Path of a folder to run the recursive search. If it is not provided, th directory that
+          you are in is used for doing the search.
       -d, --dirty
-          Checks the status of detected git repositories. Whenever it finds a repository having updates that hasn't been
-          push to upstream (these are the updates not added yet, the updates added but not committed yet, and the
-          updates committed but not pushed yet), it marks the repository as dirty. With this option, only the dirty
-          repositories are printed, not all of them.
+          Checks the status of detected git repositories. Whenever it finds a repository having
+          updates that hasn't been push to upstream (these are the updates not added yet, the
+          updates added but not committed yet, and the updates committed but not pushed yet), it
+          marks the repository as dirty. With this option, only the dirty repositories are printed,
+          not all of them.
       -h, --help
           Prints usage information for help.
 
 USAGE
-      Typically you can search for all available git repositories. Do not provide the path if you want to search in
-      your current directory.
+      Typically you can search for all available git repositories. Do not provide the path if you
+      want to search in your current directory.
 
           git-find-repos
           git-find-repos /path/to/search
@@ -70,14 +72,15 @@ USAGE
           git-find-repos --dirty /path/to/search
 
 DISCUSSIONS
-      We clone git repositories to our machines. We use many different source directories to clone into. For instance,
-      sometimes we clone repositories to our home folder, sometimes to our `/usr/local/` folder. From time to
-      time we lose track of what we changed in these repositories. This script is mainly designed for searching git
-      repositories having local modifications (i.e. -d option). It can also be used to list all git repositories in your
+      We clone git repositories to our machines. We use many different source directories to clone
+      into. For instance, sometimes we clone repositories to our home folder, sometimes to our
+      `/usr/local/` folder. From time to time we lose track of what we changed in these
+      repositories. This script is mainly designed for searching git repositories having local
+      modifications (i.e. -d option). It can also be used to list all git repositories in your
       machine to see the overall picture of what you cloned so far.
 
-      It might be not possible to search git repositories in some directories due to missing access rights. On those
-      directories, this script does not warn you.
+      It might be not possible to search git repositories in some directories due to missing access
+      rights. On those directories, this script does not warn you.
 ```
 
 <a name="git-gc-all"/>
@@ -91,20 +94,22 @@ SYNOPSIS
       git-gc-all
 
 DESCRIPTION
-      git-gc-all is a Bash script that detects and removes all unreferenced objects in a Git repository.
+      git-gc-all is a Bash script that detects and removes all unreferenced objects in a Git
+      repository.
 
 USAGE
-      The script first sets all git configurations about expiration and threshold information to zero to make ´git gc´
-      run properly. Then it runs ´git gc´. Garbage collector runs ´git prune´ behind the doors. The script should be
-      executed in a git repository.
+      The script first sets all git configurations about expiration and threshold information to
+      zero to make ´git gc´ run properly. Then it runs ´git gc´. Garbage collector runs ´git prune´
+      behind the doors. The script should be executed in a git repository.
 
           git-gc-all
 
 DISCUSSIONS
-      The script is originally defined a [stackoverflow question](http://stackoverflow.com/a/14728706/366214). Normally
-      ´git gc´ does not remove unreferenced objects if the threshold for max number of unreferenced objects is not
-      exceeded or expiration period is not over. This script sets them to zero to force garbage collector to guarantee
-      the execution of ´git gc´.
+      The script is originally defined a stackoverflow question about forcing gc activity. For
+      details, please check http://stackoverflow.com/a/14728706/366214 Normally ´git gc´ does not
+      remove unreferenced objects if the threshold for max number of unreferenced objects is not
+      exceeded or expiration period is not over. This script sets them to zero to force garbage
+      collector to guarantee the execution of ´git gc´.
 ```
 
 <a name="git-generate-changes"/>
@@ -116,7 +121,7 @@ NAME
 
 SYNOPSIS
       git-generate-changes [-h | --help] [-g | --commit] [(-p | --prefix) <prefix>]
-                           [(-c | --count) <number of files>] [(-e | --extension) <extension>]<path>
+                           [(-c | --count) <number of files>] [(-e | --extension) <extension>]
 
 DESCRIPTION
       git-generate-changes is a Bash script for creating bulk random commits in repository.
@@ -134,13 +139,15 @@ OPTIONS
           Prints usage information for help.
 
 USAGE
-      If no parameters are entered, the script creates 1 file with the default prefix and extension. The file is
-      created in the root of the git repository. The number in filename is randomly selected between 1 and 100.
+      If no parameters are entered, the script creates 1 file with the default prefix and extension.
+      The file is created in the root of the git repository. The number in filename is randomly
+      selected between 1 and 100.
 
           $ git-generate-changes
           temp27.txt ... created
 
-      You can define your own file name convention and decide to commit these files as one file per file.
+      You can define your own file name convention and decide to commit these files as one file
+      per file.
 
           $ git-generate-changes -g -p catalina -e log -c 3
           catalina84.log ... created, committed
@@ -155,6 +162,6 @@ USAGE
           catalina19.log ... modified, committed
 
 DISCUSSIONS
-      This script is mainly used when you need random commits while practicing Git. It speeds up your exercise
-      if your aim is trying -for instance- merge or rebase, not commit.
+      This script is mainly used when you need random commits while practicing Git. It speeds up
+      your exercise if your aim is trying -for instance- merge or rebase, not commit.
 ```
