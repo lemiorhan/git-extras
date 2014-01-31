@@ -1,3 +1,4 @@
+<a name="top"/>
 # Git-Extras
 
 Additional scripts required for monitoring and analyzing git.
@@ -82,6 +83,7 @@ DISCUSSIONS
       It might be not possible to search git repositories in some directories due to missing access
       rights. On those directories, this script does not warn you.
 ```
+[^Top](#top)
 
 <a name="git-gc-all"/>
 #### git-gc-all
@@ -111,6 +113,7 @@ DISCUSSIONS
       exceeded or expiration period is not over. This script sets them to zero to force garbage
       collector to guarantee the execution of ´git gc´.
 ```
+[^Top](#top)
 
 <a name="git-generate-changes"/>
 #### git-generate-changes
@@ -165,3 +168,4 @@ DISCUSSIONS
       This script is mainly used when you need random commits while practicing Git. It speeds up
       your exercise if your aim is trying -for instance- merge or rebase, not commit.
 ```
+[^Top](#top)
