@@ -15,8 +15,23 @@ all the scripts, the following applications should already be installed on your 
 
 Just clone this repository to a folder (e.g. `/usr/local/bin`) which is in the list of `PATH` environment variable.
 
+## Scripts
+
+[git-find-repos](#git-find-repos)
+[git-gc-all](#git-gc-all)
+[git-generate-changes](#git-generate-changes)
+[git-wtf](#git-wtf)
+[GitAnalyzer](#GitAnalyzer)
+[live-findfiles](#live-findfiles)
+[live-git-index](#live-git-index)
+[live-git-log](#live-git-log)
+[live-git-reflog](#live-git-reflog)
+[live-git-status](#live-git-status)
+[live-tree](#live-tree)
+
 ## Usage
 
+<a name="git-find-repos"/>
 #### git-find-repos
 
 ```
