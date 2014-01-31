@@ -5,17 +5,20 @@ set -e
 fileNameNumberUpperLimit=100
 commentNumberUpperLimit=1000
 
-function create() {
+function getFileName() {
     randomNumber=$(( ( RANDOM % $fileNameNumberUpperLimit )  + 1 ))
     file="$1$randomNumber.$2"
+    echo $file
+}
 
-    if [ -f $file ];
+function create() {
+    if [ -f $1 ];
     then
-        echo "$randomNumber" >> $file
-        echo "Modified >> $file"
+        echo "Modified file $randomNumber" >> $1
+        echo -n " ... modified"
     else
-        echo "$randomNumber" >> $file
-        echo "Created  >> $file"
+        echo "Created file $randomNumber" >> $1
+        echo -n " ... created"
     fi
 }
 
@@ -29,45 +32,54 @@ function isInGitRepo() {
     fi
 }
 
-usage() { echo "USAGE: git-generate-changes.sh -g <COMMIT TO GIT> -p <PREFIX> -c <NUMBER OF FILES> -e <EXTENSION>"; exit 1; }
+function commitToGitRepo() {
+    if [ -n "$1" ]; then
+        git add -A
+        randomNumber=$(( ( RANDOM % $commentNumberUpperLimit )  + 1 ))
+        git commit -m "Random changes #${randomNumber}" >/dev/null 2>&1
+        echo -n ", committed"
+    fi
+}
 
-prefix=
-count=
-extension=
+usage() { echo "USAGE: git-generate-changes -g -p <PREFIX> -c <NUMBER OF COMMITS> -e <EXTENSION>"; exit 1; }
+
+prefix="temp"
+count=1
+extension="txt"
 togit=
-while getopts ":p:c:e:g:" OPTION; do
-    case "$OPTION" in
-        p)
-            prefix=$OPTARG            
-            ;;
-        c)
-            count=$OPTARG
-            ;;
-        e)
-            extension=$OPTARG
-            ;;
-        g)
-            togit=$OPTARG
-            ;;
-        *)
-            usage   
-            exit 0
-            ;;
+
+realargs="$@"
+while [ $# -gt 0 ]; do
+    case "$1" in
+      -h | --help)
+        usage
+        ;;
+      -p | --prefix)
+        prefix=$2
+        shift
+        ;;
+      -c | --count)
+        count=$2
+        shift
+        ;;
+      -e | --extension)
+        extension=$2
+        shift
+        ;;
+      -g | --commit)
+        togit=1
+        ;;
+      *)
+        usage
+        break
+        ;;
     esac
+    shift
 done
-
-shift $((OPTIND-1))
-
-if [ -z "$prefix" ] || [ -z "$count" ] || [ -z "$extension" ]; then
-    usage
-fi
-
-if [ -n "$togit" ] && [ "$togit" != "true" ] && [ "$togit" != "false" ]; then
-    usage
-fi
+set -- $realargs
 
 gitStatus=$(isInGitRepo)
-if [ -n "$togit" ] && [ "$togit" == "true" ] && [ "$gitStatus" == true ]; then
+if [ -n "$togit" ] && [ "$gitStatus" == true ]; then
     echo "FATAL: The current directory is not in a git repository"
     exit 0
 fi
@@ -75,14 +87,11 @@ fi
 counter=1; 
 while [[ $counter -le "$count" ]]; 
 do
-    echo ""    
-    create $prefix $extension
-    if [ "$togit" == "true" ]; then
-        git add -A
-        randomNumber=$(( ( RANDOM % $commentNumberUpperLimit )  + 1 ))
-        git commit -m "Random changes #${randomNumber}"
-    fi
-
+    file=$(getFileName $prefix $extension)
+    echo -n "$file"
+    create $file
+    commitToGitRepo $togit
+    echo ""
     let "counter += 1";
 done
 

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 usage() {
     echo "USAGE: git-find-repos [-h | --help] [-d | --dirty] <path>"
     exit 1
@@ -18,10 +20,7 @@ while [ $# -gt 0 ]; do
         dirty=1
         ;;
       *)
-        if [ -z "$2" ]; then
-            path=$1
-        fi
-        break 2
+        path=$1
         ;;
     esac
     shift
@@ -34,7 +33,6 @@ DIRTYCOUNTER=0
 start_time=`date +%s`
 
 if [ -n "$dirty" ]; then
-    echo "Searching dirty git repositories under $path"
     while IFS= read -r -d $'\0' line; do
         COUNTER=$(( $COUNTER + 1 ))
         tmpPath=$(dirname ${line})
@@ -50,7 +48,6 @@ if [ -n "$dirty" ]; then
     done < <(find $path -type d -name ".git" -print0 2>/dev/null)
     echo "Found $DIRTYCOUNTER changed repos among $COUNTER git repositories under $path in $(expr `date +%s` - $start_time) seconds"
 else
-    echo "Searching all existing git repositories under $path"
     while IFS= read -r -d $'\0' line; do
         COUNTER=$(( $COUNTER + 1 ))
         echo "[$COUNTER.] ${line}"
