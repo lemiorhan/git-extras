@@ -1,7 +1,9 @@
 <a name="top"/>
 # Git-Extras
 
-Additional scripts required for monitoring and analyzing git.
+The best way of learning Git is practicing it. While practicing, it is beneficial to monitor the index, the status,
+the objects database and the working copy in some cases. A set of bash/groovy/ruby scripts are created to monitor
+and analyze Git internals and collected in this repository.
 
 ## Prerequisites
 
