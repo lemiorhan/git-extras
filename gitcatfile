@@ -1,0 +1,82 @@
+#!/usr/bin/env groovy
+import java.util.zip.DataFormatException
+import java.util.zip.Inflater
+
+def cli = new CliBuilder(usage: 'gitcatfile [-e <PATH>]')
+
+cli.with {
+    h longOpt: 'help', 'Show usage information'
+    e longOpt: 'extract', args: 1, argName: 'extract', 'Extracts the object in given path'
+}
+
+extract = ""
+
+def options = cli.parse(args)
+if (!options) {
+    return
+}
+if (options.h) {
+    cli.usage()
+    return
+}
+if (options.e) {
+    extract = options.extract
+} else {
+    cli.usage()
+    return
+}
+
+if (extract) {
+    def file = new File(extract)
+    if (! file.exists()) {
+        println "Object file does not exist in ${file.absolutePath}"
+        return
+    }
+    decompress(file.bytes)
+}
+
+def decompress(byte[] data) throws IOException, DataFormatException {
+    Inflater inflater = new Inflater()
+    inflater.setInput(data)
+
+    ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length)
+    byte[] buffer = new byte[1024]
+    while (!inflater.finished()) {
+        int count = inflater.inflate(buffer)
+        outputStream.write(buffer, 0, count)
+    }
+    outputStream.close()
+    byte[] output = outputStream.toByteArray()
+
+    def normalizedOutput = []
+
+    def isHex = false
+    def hexCount = 0
+    def isHeader = true
+    output.each {
+        if (it == 0 && !isHex) {
+            normalizedOutput << "\\0 "
+            if (!isHeader) {
+                isHex = true
+            } else {
+                normalizedOutput << "\n"
+            }
+            isHeader = false
+        } else if (isHex & hexCount <= 20 ) {
+            normalizedOutput << String.format("%02x", it&0xff)
+
+            hexCount++
+            if (hexCount == 20) {
+                hexCount = 0
+                isHex = false
+                normalizedOutput << "\n"
+            }
+        } else {
+            normalizedOutput << new String(it)
+        }
+    }
+    normalizedOutput.each {
+        print it
+    }
+}
+

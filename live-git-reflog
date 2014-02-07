@@ -1,14 +1,32 @@
 #!/bin/bash
 
-if [ -z "$1" ]
-then
-    echo "Missing argument. Usage: live-git-reflog.sh <number of recent reflog lines>"
-    exit 0
-fi
+set -e
+
+usage() {
+    echo "USAGE: live-git-reflog [-c | --count <max number of entries>]"
+    exit 1
+}
+
+count=20
+
+realargs="$@"
+while [ $# -gt 0 ]; do
+    case "$1" in
+      -c | --count)
+        count=$2
+        break
+        ;;
+      *)
+        usage
+        ;;
+    esac
+    shift
+done
+set -- $realargs
 
 while :
 do
 	clear
-	git --no-pager reflog show -$1 
+	git --no-pager reflog show -${count}
 sleep 1
 done

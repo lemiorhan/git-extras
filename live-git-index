@@ -1,18 +1,17 @@
 #!/bin/bash
 
 usage() {
-    echo "USAGE: live-git-index-all.sh [-c]"
-    echo "   -c: [optional] show objects of the current branch"
-    echo "       Do not use it to display objects of all branches"
+    echo "USAGE: live-git-index [-a]"
+    echo "   -a: [optional] show objects of all branches"
     exit 1
 }
 
-current=
+all=
 
-while getopts ":c" option; do
+while getopts ":a" option; do
     case "${option}" in
-        c)
-            current=1 ;;
+        a)
+            all=1 ;;
         *)
             usage ;;
     esac
@@ -26,7 +25,7 @@ do
     echo "$( git ls-files -s )"
     echo ""
 
-    if [ -n "$current" ]; then
+    if [ -n "$all" ]; then
         while read branch ; do
             echo "${branch}:"
             echo "$( git ls-tree -r $branch )"

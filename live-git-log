@@ -1,14 +1,32 @@
 #!/bin/bash
 
-if [ -z "$1" ]
-then
-    echo "Missing argument. Usage: live-git-log.sh <number of recent log lines>"
-    exit 0
-fi
+set -e
+
+usage() {
+    echo "USAGE: live-git-index [-c | --count <max number of commits>]"
+    exit 1
+}
+
+count=20
+
+realargs="$@"
+while [ $# -gt 0 ]; do
+    case "$1" in
+      -c | --count)
+        count=$2
+        break
+        ;;
+      *)
+        usage
+        ;;
+    esac
+    shift
+done
+set -- $realargs
 
 while :
 do
 	clear
-	git --no-pager log -$1 --graph --all --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --date-order
+	git --no-pager log -${count} --graph --all --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --date-order
 	sleep 1
 done
