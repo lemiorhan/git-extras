@@ -466,7 +466,7 @@ DISCUSSIONS
 [Go to top](#top)
 
 <a name="live-git-status"/>
-#### live-git-reflog
+#### live-git-status
 
 ```
 NAME
