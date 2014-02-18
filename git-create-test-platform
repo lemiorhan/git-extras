@@ -1,0 +1,64 @@
+#!/bin/bash
+
+set -e
+
+usage() {
+    echo "USAGE: git-create-test-platform [-f | --folder <folder>] [-r | --repository <repository>]"
+    exit 1
+}
+
+repo=
+folder=
+path=$(pwd)
+
+realargs="$@"
+while [ $# -gt 0 ]; do
+    case "$1" in
+        -r | --repository)
+            repo=$2
+            shift
+        ;;
+        -f | --folder)
+            folder=$2
+            shift
+        ;;
+        *)
+            usage
+        ;;
+    esac
+    shift
+done
+set -- $realargs
+
+if [ -z "$repo" ] || [ -z "$folder" ]; then
+    usage
+    return
+fi
+
+if [ -d "$path/$folder" ]; then
+    echo "Folder already exists in $path/$folder"
+    echo "Quiting"
+    exit 0
+fi
+
+mkdir -p ${path}/${folder}
+echo "ROOT   >> Root folder is created as ${path}/${folder}"
+
+mkdir -p ${path}/${folder}/server/${repo}.git > /dev/null 2>&1
+cd ${path}/${folder}/server/${repo}.git
+git init --bare > /dev/null 2>&1
+echo "REMOTE >> Bare repository is created under server/${repo}.git"
+
+mkdir -p ${path}/${folder}/clients > /dev/null 2>&1
+mkdir -p ${path}/${folder}/clients/edison > /dev/null 2>&1
+cd ${path}/${folder}/clients/edison
+git clone "file://${path}/${folder}/server/${repo}.git" ${repo}.git > /dev/null 2>&1
+echo "CLIENT >> The repository is cloned under clients/edison/${repo}.git"
+
+mkdir -p ${path}/${folder}/clients > /dev/null 2>&1
+mkdir -p ${path}/${folder}/clients/tesla > /dev/null 2>&1
+cd ${path}/${folder}/clients/tesla
+git clone "file://${path}/${folder}/server/${repo}.git" ${repo}.git > /dev/null 2>&1
+echo "CLIENT >> The repository is cloned under clients/tesla/${repo}.git"
+
+echo "DONE"
