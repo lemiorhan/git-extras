@@ -21,7 +21,7 @@ shift $((OPTIND-1))
 while :
 do
     clear
-    echo "Current Branch with Staged Content:"
+    echo "HEAD:"
     echo "$( git ls-files -s )"
     echo ""
 
