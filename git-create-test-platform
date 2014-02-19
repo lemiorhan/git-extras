@@ -3,12 +3,13 @@
 set -e
 
 usage() {
-    echo "USAGE: git-create-test-platform [-f | --folder <folder>] [-r | --repository <repository>]"
+    echo "USAGE: git-create-test-platform [-f | --folder <folder>] [-r | --repository <repository>] [-u | --usercount <count>]"
     exit 1
 }
 
 repo=
 folder=
+user_count=2
 path=$(pwd)
 
 realargs="$@"
@@ -20,6 +21,10 @@ while [ $# -gt 0 ]; do
         ;;
         -f | --folder)
             folder=$2
+            shift
+        ;;
+        -u | --usercount)
+            user_count=$2
             shift
         ;;
         *)
@@ -37,28 +42,32 @@ fi
 
 if [ -d "$path/$folder" ]; then
     echo "Folder already exists in $path/$folder"
-    echo "Quiting"
+    echo "Quited"
     exit 0
 fi
 
-mkdir -p ${path}/${folder}
-echo "ROOT   >> Root folder is created as ${path}/${folder}"
+root=${path}/${folder}
+mkdir -p ${root}
+echo "ROOT   >> Root folder is created as ${root}"
 
-mkdir -p ${path}/${folder}/server/${repo}.git > /dev/null 2>&1
-cd ${path}/${folder}/server/${repo}.git
+mkdir -p ${root}/server/${repo}.git > /dev/null 2>&1
+cd ${root}/server/${repo}.git
 git init --bare > /dev/null 2>&1
 echo "REMOTE >> Bare repository is created under server/${repo}.git"
 
-mkdir -p ${path}/${folder}/clients > /dev/null 2>&1
-mkdir -p ${path}/${folder}/clients/edison > /dev/null 2>&1
-cd ${path}/${folder}/clients/edison
-git clone "file://${path}/${folder}/server/${repo}.git" ${repo}.git > /dev/null 2>&1
-echo "CLIENT >> The repository is cloned under clients/edison/${repo}.git"
+for (( i=1; i<=${user_count}; i++ ))
+do
+    mkdir -p ${root}/clients > /dev/null 2>&1
+    mkdir -p ${root}/clients/user${i} > /dev/null 2>&1
+    cd ${root}/clients/user${i}
+    git clone "file://${root}/server/${repo}.git" ${repo}.git > /dev/null 2>&1
+    cd ${root}/clients/user${i}/${repo}.git
+    git config user.name "User${i}"
+    git config user.email "user${i}@practicinggit.com"
+    git config branch.autosetuprebase never
+    git config branch.autosetupmerge true
+    git config branch.master.rebase false
+    echo "CLIENT >> The repository is cloned under clients/user${i}/${repo}.git"
+done
 
-mkdir -p ${path}/${folder}/clients > /dev/null 2>&1
-mkdir -p ${path}/${folder}/clients/tesla > /dev/null 2>&1
-cd ${path}/${folder}/clients/tesla
-git clone "file://${path}/${folder}/server/${repo}.git" ${repo}.git > /dev/null 2>&1
-echo "CLIENT >> The repository is cloned under clients/tesla/${repo}.git"
-
-echo "DONE"
+echo "1 bare repository and ${user_count} clients are created. Ready for practicing."
