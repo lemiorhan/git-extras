@@ -24,6 +24,9 @@ Just clone this repository to a folder (e.g. `/usr/local/bin`) which is in the l
 * [git-find-repos](#git-find-repos)
 * [git-gc-all](#git-gc-all)
 * [git-generate-changes](#git-generate-changes)
+* [git-practice-platform](#git-practice-platform)
+
+**Bash Scripts for Monitoring**
 * [live-findfiles](#live-findfiles)
 * [live-git-index](#live-git-index)
 * [live-git-log](#live-git-log)
@@ -279,6 +282,76 @@ DISCUSSIONS
 
       The script runs slow for big projects due to analysis per object. We plan to improve the
       performance in the coming releases.
+```
+[Go to top](#top)
+
+<a name="git-practice-platform"/>
+#### git-practice-platform
+
+```
+NAME
+      git-practice-platform - Creates a bare repo and multiple users for practicing git
+
+SYNOPSIS
+      git-practice-platform
+          [-f | --folder <folder>]
+          [-r | --repository <repository>]
+          [-u | --usercount <count>]
+
+DESCRIPTION
+      git-practice-platform is a Bash script that creates a bare repository for simulating remote
+      repositories, multiple clients cloning the bare repository simulating a teamwork on the
+      repository.
+
+OPTIONS
+      -f | --folder <folder>
+          The name of the root folder where all users clone the repository in it
+      -r | --repository <repository>
+          The name of the repository which is created for testing purposes
+      -u | --usercount <count>
+          Number of cloning users. If not defined, 2 users are created by default.
+USAGE
+      In order to create 3 users, the following command can be used.
+
+          $ git-create-test-platform -u 3 -f practicegit -r uberproject
+          Root folder >>
+              Created as /Users/user/practicegit
+          Bare repository >>
+              Created under server/uberproject.git
+          User1 repository >>
+              Created folder server/uberproject.git
+              Cloned under clients/user1/uberproject.git
+              Applied initial git configurations
+              Created file .gitignore
+          User2 repository >>
+              Created folder server/uberproject.git
+              Cloned under clients/user2/uberproject.git
+              Applied initial git configurations
+              Created file .gitignore
+          User3 repository >>
+              Created folder server/uberproject.git
+              Cloned under clients/user3/uberproject.git
+              Applied initial git configurations
+              Created file .gitignore
+          1 bare repository and 3 clients are created. Ready for practicing.
+
+      And the following folder structure is created.
+
+          practicegit/
+          |-- clients
+          |   |-- user1
+          |   |   `-- uberproject.git
+          |   |-- user2
+          |   |   `-- uberproject.git
+          |   `-- user3
+          |       `-- uberproject.git
+          `-- server
+              `-- uberproject.git
+
+DISCUSSIONS
+      The best way of learning git is practicing it. We've been practicing git by creating bare
+      and cloning repositories on our locals for a long time. This script automatises the whole
+      create folders process and lets you initialize the practicing platform with one command.
 ```
 [Go to top](#top)
 

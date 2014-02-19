@@ -3,7 +3,7 @@
 set -e
 
 usage() {
-    echo "USAGE: git-create-test-platform [-f | --folder <folder>] [-r | --repository <repository>] [-u | --usercount <count>]"
+    echo "USAGE: git-practice-platform [-f | --folder <folder>] [-r | --repository <repository>] [-u | --usercount <count>]"
     exit 1
 }
 
@@ -48,26 +48,37 @@ fi
 
 root=${path}/${folder}
 mkdir -p ${root}
-echo "ROOT   >> Root folder is created as ${root}"
+echo "Root folder >>"
+echo "    Created as ${root}"
 
 mkdir -p ${root}/server/${repo}.git > /dev/null 2>&1
 cd ${root}/server/${repo}.git
 git init --bare > /dev/null 2>&1
-echo "REMOTE >> Bare repository is created under server/${repo}.git"
+echo "Bare repository >>"
+echo "    Created under server/${repo}.git"
 
 for (( i=1; i<=${user_count}; i++ ))
 do
+    echo "User${i} repository >>"
+
     mkdir -p ${root}/clients > /dev/null 2>&1
     mkdir -p ${root}/clients/user${i} > /dev/null 2>&1
+    echo "    Created folder server/${repo}.git"
+
     cd ${root}/clients/user${i}
     git clone "file://${root}/server/${repo}.git" ${repo}.git > /dev/null 2>&1
+    echo "    Cloned under clients/user${i}/${repo}.git"
+
     cd ${root}/clients/user${i}/${repo}.git
     git config user.name "User${i}"
     git config user.email "user${i}@practicinggit.com"
     git config branch.autosetuprebase never
     git config branch.autosetupmerge true
     git config branch.master.rebase false
-    echo "CLIENT >> The repository is cloned under clients/user${i}/${repo}.git"
+    echo "    Applied initial git configurations"
+
+    echo -e "*.orig\n*.swp\n*.tmp\n*.old\n*.backup\n*.diff\n*.~" >> ${root}/clients/user${i}/${repo}.git/.gitignore
+    echo "    Created file .gitignore"
 done
 
 echo "1 bare repository and ${user_count} clients are created. Ready for practicing."
