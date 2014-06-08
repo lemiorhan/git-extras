@@ -313,7 +313,7 @@ OPTIONS
 USAGE
       In order to create 3 users, the following command can be used.
 
-          $ git-create-test-platform -u 3 -f practicegit -r uberproject
+          $ git-practice-platform -u 3 -f practicegit -r uberproject
           Root folder >>
               Created as /Users/user/practicegit
           Bare repository >>
