@@ -1,0 +1,148 @@
+# This file contains useful git config commands with definitions
+# All configs are set globally in order to make it available for all your projects
+
+######################
+ INITIAL SETUP
+######################
+
+# First config you have to do is to add your name and email to git
+git config --global user.name "YOUR NAME"
+git config --global user.email "YOUR EMAIL"
+
+######################
+ ALIASES
+######################
+
+# Shortcut for most used command as checkout
+git config --global alias.co "checkout"
+
+# Shortcut for most used command as status
+git config --global alias.s "status"
+
+# Displays more details for the following commands
+git config --global alias.b "branch -v"
+git config --global alias.r "remote -v"
+git config --global alias.t "tag -l"
+
+# Displays commit graph is a nice colored view for all branches including stashes
+# Use "-N" for displaying the last N commits
+git config --global alias.la "log --graph --all --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%C reset' --abbrev-commit --date=relative"
+
+# Displays commit graph is a nice colored view for just the current branch
+# Use "-N" for displaying the last N commits
+git config --global alias.lb "log --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
+
+# Displays each commit with full details one after another in a list view
+# Use "-N" for displaying the last N commits
+git config --global alias.lf "log --format=fuller"
+
+# Displays each commit as 1 line. It is mainly used to see commits in one shot.
+# Use "-N" for displaying the last N commits
+git config --global alias.l1 "log --stat --pretty=oneline"
+
+# Removes the change set of your last commit from the commit store (your project's object database)
+# And keeps it in Index. The commit message of your last commit is also re-used in your next commit.
+git config --global alias.amend "commit --amend -C HEAD"
+
+# Displays the content of your given commit
+# Usage: git showco COMMIT_ID
+git config --global alias.showco "!git --no-pager show --stat --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+
+# Removes all un-committed changes, including untracked files and the ones in Index
+git config --global alias.clear "!git reset --hard HEAD; git clean -f"
+
+# Removes all changesets from staging area
+git config --global unstage "reset HEAD"
+
+######################
+ CORE
+######################
+
+# Git does not mark your code if the line endings are changed
+git config --global core.autocrlf "false"
+
+# Sets the default editor for writing commit messages or editing interactive rebase commands to vim
+git config --global core.editor "vim"
+
+######################
+ PUSH
+######################
+
+# Before git v2, push command sends all your un-pushed commits regardless of checking the source branch
+# It means you will push commits from other branches if you don't specify branch like "git push origin BRANCH_NAME"
+# By changing the default behavior to simple, you guarantee to push the commits of your current branch only
+git config --global push.default simple
+
+######################
+ BRANCH
+######################
+
+# Pull will always do fetch + rebase instead of fetch + merge as default behavior
+git config --global branch.autosetuprebase "always"
+
+# Whenever you create a branch via "branch" or "checkout -b" commands, git will automatically track the remote one
+git config --global branch.autosetupmerge "always"
+
+######################
+ LOG
+######################
+
+# Print out the ref names of any commits that are shown. The ref name prefixes refs/heads/, refs/tags/ and refs/remotes/ will be printed.
+git config --global log.decorate "full"
+
+# Shows timestamps in ISO 8601 format: http://en.wikipedia.org/wiki/ISO_8601
+git config --global log.date "iso"
+
+######################
+ MERGE
+######################
+
+# Puts the commit messages of the ones that are merged to the commit message of the merge
+git config --global merge.summary "true"
+
+# Always show a diffstat at the end of a merge
+git config --global merge.stat true
+
+######################
+ COLOR
+######################
+
+# Prints all outputs in color whenever possible
+git config --global color.diff "auto"
+git config --global color.status "auto"
+git config --global color.branch "auto"
+git config --global color.interactive "auto"
+git config --global color.ui "auto"
+
+######################
+ DIFF
+######################
+
+# Changes the diff algorithm to a more efficient one
+git config --global diff.algorithm "patience"
+
+# Tell git diff to use mnemonic prefixes (index, work tree, commit, object) instead of the standard a and b notation
+git config --global diff.mnemonicprefix "true"
+
+# Allow git diff to do basic rename and copy detection
+git config --global diff.renames copies
+
+######################
+ DIFFTOOL
+######################
+
+# Using kdiff3 for resolving for diffs.
+git config --global difftool.kdiff3.path PATH_TO_kdiff3
+git config --global difftool.kdiff3.trustExitCode "true"
+git config --global difftool.prompt "false"
+git config --global diff.tool "kdiff3"
+
+######################
+ MERGETOOL
+######################
+
+# Using kdiff3 for resolving for resolving merge conflicts.
+git config --global mergetool.kdiff3.path PATH_TO_kdiff3
+git config --global mergetool.kdiff3.trustExitCode "true"
+git config --global mergetool.keepBackup "false"
+git config --global merge.tool "kdiff3"
