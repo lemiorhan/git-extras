@@ -19,9 +19,13 @@ git config --global alias.co "checkout"
 # Shortcut for most used command as status
 git config --global alias.s "status"
 
-# Displays more details for the following commands
-git config --global alias.b "branch -v"
+# Shows all branches including local and remote ones
+git config --global alias.b "branch -av"
+
+# Shows remote name - url mapping for fetch and push
 git config --global alias.r "remote -v"
+
+# Shows all existing tags
 git config --global alias.t "tag -l"
 
 # Displays commit graph is a nice colored view for all branches including stashes
@@ -53,6 +57,10 @@ git config --global alias.clear "!git reset --hard HEAD; git clean -f"
 
 # Removes all changesets from staging area
 git config --global unstage "reset HEAD"
+
+# Shows commit messages one line per commit between 2 commits
+# Use like "git changelog v01..HEAD"
+git config --global changelog "log --pretty=format:\" * %s\""
 
 ######################
  CORE
