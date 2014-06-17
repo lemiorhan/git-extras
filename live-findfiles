@@ -1,8 +1,13 @@
 #!/bin/bash
 
+path=.
+if [ -n "$1" ]; then
+  path=$1
+fi
+
 while :
 do
     clear
-    find . -type f -print
+    find $path -type f -print
     sleep 1
 done
