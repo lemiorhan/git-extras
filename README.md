@@ -364,16 +364,24 @@ NAME
       folder
 
 SYNOPSIS
-      live-findfiles
+      live-findfiles [<path>]
 
 DESCRIPTION
       live-findfiles is a Bash script that runs find command on every second and displays the files
       with their paths (including hidden files and folders)
 
 USAGE
-      The script runs `find` command and displays the content as a list.
+      The script runs `find` command and displays the content as a list. By default, it displays
+      content of the current directory.
 
           live-findfiles
+          live-findfiles .
+
+      It also displays the content of any given directory continuously.
+
+          live-findfiles /home/user/project/logs
+          live-findfiles ~/data
+          live-findfiles ../../items
 
 DISCUSSIONS
       The script can be used to monitor the contents of folders and visualize the impact of git
