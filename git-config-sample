@@ -1,13 +1,18 @@
+#!/bin/bash
+
+######################
 # This file contains useful git config commands with definitions
 # All configs are set globally in order to make it available for all your projects
+# Before running the commands, DO NOT FORGET to replace the words in curly braces with corresponding the data
+######################
 
 ######################
  INITIAL SETUP
 ######################
 
 # First config you have to do is to add your name and email to git
-git config --global user.name "YOUR NAME"
-git config --global user.email "YOUR EMAIL"
+git config --global user.name "{YOUR_NAME}"
+git config --global user.email "{YOUR_EMAIL}"
 
 ######################
  ALIASES
@@ -56,11 +61,15 @@ git config --global alias.showco "!git --no-pager show --stat --pretty=format:'%
 git config --global alias.clear "!git reset --hard HEAD; git clean -f"
 
 # Removes all changesets from staging area
-git config --global unstage "reset HEAD"
+git config --global alias.unstage "reset HEAD"
 
 # Shows commit messages one line per commit between 2 commits
 # Use like "git changelog v01..HEAD"
-git config --global changelog "log --pretty=format:\" * %s\""
+git config --global alias.changelog "log --pretty=format:' * %s'"
+
+# Displays last update date for all existing tags and branches in a graph view
+# Then you can learn all old legacy branches and tags from old days
+git config --global alias.dates "log --date-order --graph --tags --branches --simplify-by-decoration --pretty=format:'%ai %h %d'"
 
 ######################
  CORE
@@ -78,8 +87,8 @@ git config --global core.editor "vim"
 
 # Before git v2, push command sends all your un-pushed commits regardless of checking the source branch
 # It means you will push commits from other branches if you don't specify branch like "git push origin BRANCH_NAME"
-# By changing the default behavior to simple, you guarantee to push the commits of your current branch only
-git config --global push.default simple
+# By changing the default behavior to tracking, you guarantee to push the commits of your current branch only
+git config --global push.default "tracking"
 
 ######################
  BRANCH
@@ -100,16 +109,6 @@ git config --global log.decorate "full"
 
 # Shows timestamps in ISO 8601 format: http://en.wikipedia.org/wiki/ISO_8601
 git config --global log.date "iso"
-
-######################
- MERGE
-######################
-
-# Puts the commit messages of the ones that are merged to the commit message of the merge
-git config --global merge.summary "true"
-
-# Always show a diffstat at the end of a merge
-git config --global merge.stat true
 
 ######################
  COLOR
@@ -133,24 +132,34 @@ git config --global diff.algorithm "patience"
 git config --global diff.mnemonicprefix "true"
 
 # Allow git diff to do basic rename and copy detection
-git config --global diff.renames copies
+git config --global diff.renames "copies"
 
 ######################
  DIFFTOOL
 ######################
 
 # Using kdiff3 for resolving for diffs.
-git config --global difftool.kdiff3.path PATH_TO_kdiff3
+git config --global difftool.kdiff3.path "{PATH_TO_kdiff3}"
 git config --global difftool.kdiff3.trustExitCode "true"
 git config --global difftool.prompt "false"
 git config --global diff.tool "kdiff3"
+
+######################
+ MERGE
+######################
+
+# Puts the commit messages of the ones that are merged to the commit message of the merge
+git config --global merge.summary "true"
+
+# Always show a diffstat at the end of a merge
+git config --global merge.stat "true"
 
 ######################
  MERGETOOL
 ######################
 
 # Using kdiff3 for resolving for resolving merge conflicts.
-git config --global mergetool.kdiff3.path PATH_TO_kdiff3
+git config --global mergetool.kdiff3.path "{PATH_TO_kdiff3}"
 git config --global mergetool.kdiff3.trustExitCode "true"
 git config --global mergetool.keepBackup "false"
 git config --global merge.tool "kdiff3"
