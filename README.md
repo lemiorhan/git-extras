@@ -18,13 +18,10 @@ all the scripts, the following applications should already be installed on your 
 
 Just clone this repository to a folder (e.g. `/usr/local/bin`) which is in the list of `PATH` environment variable.
 
-## Files
-* **git-config-sample** : Lists a set of config commands that we advice to use without fear. I also includes detailed
-explanation for each config entry.
-
 ## Scripts
 
 **Bash Scripts**
+* [git-config-sample](#git-config-sample)
 * [git-find-repos](#git-find-repos)
 * [git-gc-all](#git-gc-all)
 * [git-generate-changes](#git-generate-changes)
@@ -46,6 +43,34 @@ explanation for each config entry.
 * [git-wtf](#git-wtf)
 
 ## Usage
+
+<a name="git-config-sample"/>
+#### git-config-sample
+
+```
+NAME
+      git-config-sample - Updates your git configuration with the ones we advice
+
+SYNOPSIS
+      git-config-sample
+
+DESCRIPTION
+      git-config-sample updates your git configuration with a set of config commands that we
+      advice to use without fear. I also includes detailed explanation for each config entry.
+
+USAGE
+      You can directly call the script and let it update the configuration.
+
+          git-config-sample
+
+      In order to check whether the configurations are updated or not, you can check
+      `~/.gitconfig` file.
+
+DISCUSSIONS
+      The content of this script is gathered after using Git for years with many tweaks.
+      We also made a good search to learn how git-geeks use on their systems.
+```
+[Go to top](#top)
 
 <a name="git-find-repos"/>
 #### git-find-repos
