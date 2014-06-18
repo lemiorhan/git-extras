@@ -35,7 +35,7 @@ git config --global alias.t "tag -l"
 
 # Displays commit graph is a nice colored view for all branches including stashes
 # Use "-N" for displaying the last N commits
-git config --global alias.la "log --graph --all --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%C reset' --abbrev-commit --date=relative"
+git config --global alias.la "log --graph --all --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
 
 # Displays commit graph is a nice colored view for just the current branch
 # Use "-N" for displaying the last N commits
