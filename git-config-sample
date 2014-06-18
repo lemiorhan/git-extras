@@ -7,7 +7,7 @@
 ######################
 
 ######################
- INITIAL SETUP
+# INITIAL SETUP
 ######################
 
 # First config you have to do is to add your name and email to git
@@ -15,7 +15,7 @@ git config --global user.name "{YOUR_NAME}"
 git config --global user.email "{YOUR_EMAIL}"
 
 ######################
- ALIASES
+# ALIASES
 ######################
 
 # Shortcut for most used command as checkout
@@ -72,7 +72,7 @@ git config --global alias.changelog "log --pretty=format:' * %s'"
 git config --global alias.dates "log --date-order --graph --tags --branches --simplify-by-decoration --pretty=format:'%ai %h %d'"
 
 ######################
- CORE
+# CORE
 ######################
 
 # Git does not mark your code if the line endings are changed
@@ -82,7 +82,7 @@ git config --global core.autocrlf "false"
 git config --global core.editor "vim"
 
 ######################
- PUSH
+# PUSH
 ######################
 
 # Before git v2, push command sends all your un-pushed commits regardless of checking the source branch
@@ -91,7 +91,7 @@ git config --global core.editor "vim"
 git config --global push.default "tracking"
 
 ######################
- BRANCH
+# BRANCH
 ######################
 
 # Pull will always do fetch + rebase instead of fetch + merge as default behavior
@@ -101,7 +101,7 @@ git config --global branch.autosetuprebase "always"
 git config --global branch.autosetupmerge "always"
 
 ######################
- LOG
+# LOG
 ######################
 
 # Print out the ref names of any commits that are shown. The ref name prefixes refs/heads/, refs/tags/ and refs/remotes/ will be printed.
@@ -111,7 +111,7 @@ git config --global log.decorate "full"
 git config --global log.date "iso"
 
 ######################
- COLOR
+# COLOR
 ######################
 
 # Prints all outputs in color whenever possible
@@ -122,7 +122,7 @@ git config --global color.interactive "auto"
 git config --global color.ui "auto"
 
 ######################
- DIFF
+# DIFF
 ######################
 
 # Changes the diff algorithm to a more efficient one
@@ -135,7 +135,7 @@ git config --global diff.mnemonicprefix "true"
 git config --global diff.renames "copies"
 
 ######################
- DIFFTOOL
+# DIFFTOOL
 ######################
 
 # Using kdiff3 for resolving for diffs.
@@ -145,7 +145,7 @@ git config --global difftool.prompt "false"
 git config --global diff.tool "kdiff3"
 
 ######################
- MERGE
+# MERGE
 ######################
 
 # Puts the commit messages of the ones that are merged to the commit message of the merge
@@ -155,7 +155,7 @@ git config --global merge.summary "true"
 git config --global merge.stat "true"
 
 ######################
- MERGETOOL
+# MERGETOOL
 ######################
 
 # Using kdiff3 for resolving for resolving merge conflicts.
