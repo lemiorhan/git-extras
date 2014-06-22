@@ -23,7 +23,6 @@ Just clone this repository to a folder (e.g. `/usr/local/bin`) which is in the l
 **Bash Scripts**
 * [git-config-sample](#git-config-sample)
 * [git-find-repos](#git-find-repos)
-* [git-gc-all](#git-gc-all)
 * [git-generate-changes](#git-generate-changes)
 * [git-practice-platform](#git-practice-platform)
 
@@ -122,36 +121,6 @@ DISCUSSIONS
 
       It might be not possible to search git repositories in some directories due to missing access
       rights. On those directories, this script does not warn you.
-```
-[Go to top](#top)
-
-<a name="git-gc-all"/>
-#### git-gc-all
-
-```
-NAME
-      git-gc-all - Removes all unreferenced objects from Git repository
-
-SYNOPSIS
-      git-gc-all
-
-DESCRIPTION
-      git-gc-all is a Bash script that detects and removes all unreferenced objects in a Git
-      repository.
-
-USAGE
-      The script first sets all git configurations about expiration and threshold information to
-      zero to make ´git gc´ run properly. Then it runs ´git gc´. Garbage collector runs ´git prune´
-      behind the doors. The script should be executed in a git repository.
-
-          git-gc-all
-
-DISCUSSIONS
-      The script is originally defined a stackoverflow question about forcing gc activity. For
-      details, please check http://stackoverflow.com/a/14728706/366214 Normally ´git gc´ does not
-      remove unreferenced objects if the threshold for max number of unreferenced objects is not
-      exceeded or expiration period is not over. This script sets them to zero to force garbage
-      collector to guarantee the execution of ´git gc´.
 ```
 [Go to top](#top)
 

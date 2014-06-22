@@ -33,6 +33,10 @@ git config --global alias.r "remote -v"
 # Shows all existing tags
 git config --global alias.t "tag -l"
 
+# FOR VERSIONS AFTER GIT v2.0
+# Shows all existing tags in a sorted list
+git config --global alias.t "tag -l --sort=version:refname"
+
 # Displays commit graph is a nice colored view for all branches including stashes
 # Use "-N" for displaying the last N commits
 git config --global alias.la "log --graph --all --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
@@ -71,6 +75,9 @@ git config --global alias.changelog "log --pretty=format:' * %s'"
 # Then you can learn all old legacy branches and tags from old days
 git config --global alias.dates "log --date-order --graph --tags --branches --simplify-by-decoration --pretty=format:'%ai %h %d'"
 
+# Forces to run garbage collector to remove unreferenced objects and pack the others
+git config --global alias.gc-all "-c gc.reflogExpire=0 -c gc.reflogExpireUnreachable=0 -c gc.rerereresolved=0 -c gc.rerereunresolved=0 -c gc.pruneExpire=now gc \"$@\""
+
 ######################
 # CORE
 ######################
@@ -85,10 +92,11 @@ git config --global core.editor "vim"
 # PUSH
 ######################
 
+# FOR VERSIONS BEFORE GIT v2.0
 # Before git v2, push command sends all your un-pushed commits regardless of checking the source branch
 # It means you will push commits from other branches if you don't specify branch like "git push origin BRANCH_NAME"
-# By changing the default behavior to tracking, you guarantee to push the commits of your current branch only
-git config --global push.default "tracking"
+# By changing the default behavior to simple, you guarantee to push the commits of your current branch only
+git config --global push.default "simple"
 
 ######################
 # BRANCH
