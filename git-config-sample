@@ -22,7 +22,7 @@ git config --global user.email "{YOUR_EMAIL}"
 git config --global alias.co "checkout"
 
 # Shortcut for most used command as status
-git config --global alias.s "status"
+git config --global alias.s "status -uall"
 
 # Shows all branches including local and remote ones
 git config --global alias.b "branch -av"
