@@ -171,3 +171,11 @@ git config --global mergetool.kdiff3.path "{PATH_TO_kdiff3}"
 git config --global mergetool.kdiff3.trustExitCode "true"
 git config --global mergetool.keepBackup "false"
 git config --global merge.tool "kdiff3"
+
+######################
+# CREDENTIALS
+######################
+
+# if you're on Mac OS and used homebrew to install git, you can use the native Mac OS keystore
+# Then there will be no need to enter your passphrase on every pull & push
+git config --global credential.helper "osxkeychain"
