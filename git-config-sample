@@ -1,6 +1,14 @@
 #!/bin/bash
 
 ######################
+# CONFIGURATIONS TO CHANGE
+######################
+
+YOUR_NAME="name surname"
+YOUR_EMAIL="email@sample.com"
+PATH_TO_KDIFF3="/Applications/kdiff3.app/Contents/MacOS/kdiff3"
+
+######################
 # This file contains useful git config commands with definitions
 # All configs are set globally in order to make it available for all your projects
 # Before running the commands, DO NOT FORGET to replace the words in curly braces with corresponding the data
@@ -11,8 +19,8 @@
 ######################
 
 # First config you have to do is to add your name and email to git
-git config --global user.name "{YOUR_NAME}"
-git config --global user.email "{YOUR_EMAIL}"
+git config --global user.name "${YOUR_NAME}"
+git config --global user.email "${YOUR_EMAIL}"
 
 ######################
 # ALIASES
@@ -147,7 +155,7 @@ git config --global diff.renames "copies"
 ######################
 
 # Using kdiff3 for resolving for diffs.
-git config --global difftool.kdiff3.path "{PATH_TO_kdiff3}"
+git config --global difftool.kdiff3.path "${PATH_TO_KDIFF3}"
 git config --global difftool.kdiff3.trustExitCode "true"
 git config --global difftool.prompt "false"
 git config --global diff.tool "kdiff3"
@@ -167,7 +175,7 @@ git config --global merge.stat "true"
 ######################
 
 # Using kdiff3 for resolving for resolving merge conflicts.
-git config --global mergetool.kdiff3.path "{PATH_TO_kdiff3}"
+git config --global mergetool.kdiff3.path "{PATH_TO_KDIFF3}"
 git config --global mergetool.kdiff3.trustExitCode "true"
 git config --global mergetool.keepBackup "false"
 git config --global merge.tool "kdiff3"
