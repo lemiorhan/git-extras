@@ -41,6 +41,9 @@ git config --global alias.r "remote -v"
 # Shows all existing tags
 git config --global alias.t "tag -l"
 
+# Combines git add all and git commit in one command
+git config --global alias.ac '!git add -A && git commit'
+
 # FOR VERSIONS AFTER GIT v2.0
 # Shows all existing tags in a sorted list
 git config --global alias.t "tag -l --sort=version:refname"
