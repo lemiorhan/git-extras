@@ -71,14 +71,17 @@ do
 
     cd ${root}/clients/user${i}/${repo}.git
     git config user.name "User${i}"
-    git config user.email "user${i}@practicinggit.com"
+    git config user.email "user${i}@gittraining.com"
     git config branch.autosetuprebase never
     git config branch.autosetupmerge true
     git config branch.master.rebase false
+    git config alias.la "log --graph --all --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
+    git config alias.lb "log --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
+    git config alias.lf "log --format=fuller"
+    git config alias.l1 "log --stat --pretty=oneline"
+    
     echo "    Applied initial git configurations"
 
-    echo -e "*.orig\n*.swp\n*.tmp\n*.old\n*.backup\n*.diff\n*.~" >> ${root}/clients/user${i}/${repo}.git/.gitignore
-    echo "    Created file .gitignore"
 done
 
 echo "1 bare repository and ${user_count} clients are created. Ready for practicing."
