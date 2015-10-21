@@ -65,7 +65,7 @@ git config --global alias.lf "log --format=fuller"
 git config --global alias.l1 "log --stat --pretty=oneline"
 
 # Displays reflog data with the information of related commits
-git config --global alias.ref "log -g --pretty=format:'%C(yellow)%h%Creset %gD: %gs %Cred==>%Creset %C(yellow)%s%Creset (%cr) <%an>'"
+git config --global alias.ref "log -g --pretty=format:'%C(yellow)%h%Creset %gD: %gs %Cred==>%Creset %C(yellow)%s%Creset (%cr) <%an>' --date=iso"
 
 # Removes the change set of your last commit from the commit store (your project's object database)
 # And keeps it in Index. The commit message of your last commit is also re-used in your next commit.
