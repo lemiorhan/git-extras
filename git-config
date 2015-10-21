@@ -64,6 +64,9 @@ git config --global alias.lf "log --format=fuller"
 # Use "-N" for displaying the last N commits
 git config --global alias.l1 "log --stat --pretty=oneline"
 
+# Displays reflog data with the information of related commits
+git config --global alias.ref "log -g --pretty=format:'%C(yellow)%h%Creset %gD: %gs %Cred==>%Creset %C(yellow)%s%Creset (%cr) <%an>'"
+
 # Removes the change set of your last commit from the commit store (your project's object database)
 # And keeps it in Index. The commit message of your last commit is also re-used in your next commit.
 git config --global alias.amend "commit --amend -C HEAD"
@@ -98,6 +101,10 @@ git config --global core.autocrlf "false"
 
 # Sets the default editor for writing commit messages or editing interactive rebase commands to vim
 git config --global core.editor "vim"
+
+# Change the default pager application to 'less'
+git config --global --replace-all core.pager "less -iXFR"
+
 
 ######################
 # PUSH
