@@ -50,6 +50,9 @@ git config --global alias.d "difftool"
 # Shows diff between the version in working copy and staging area
 git config --global alias.dc "difftool --cached"
 
+# Shows diff between the version in working copy and staging area
+git config --global alias.dl "difftool HEAD..HEAD~"
+
 # FOR VERSIONS AFTER GIT v2.0
 # Shows all existing tags in a sorted list
 git config --global alias.t "tag -l --sort=version:refname"
