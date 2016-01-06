@@ -1,0 +1,35 @@
+#!/bin/bash
+echo ""
+echo -e "###> \033[31mMANDATORY BRANCHES\033[0m"
+echo ""
+echo -e " \033[32mmaster\033[0m and \033[32mdevelopment\033[0m branches are excluded from the list"
+
+count=$(git branch -r --no-merged | grep -v master | grep -v development | xargs -L1 git --no-pager log --pretty=tformat:'%Cgreen%d%Creset - %h by %an (%Cblue%ar%Creset)' -1 | wc -l)
+echo ""
+echo -e "###> \033[31m${count//[[:space:]]/} UNMERGED REMOTE BRANCHES\033[0m"
+echo ""
+
+git branch -r --no-merged | grep -v master | grep -v development | xargs -L1 git --no-pager log --pretty=tformat:'%Cgreen%d%Creset - %h by %an (%Cblue%ar%Creset)' -1
+
+count=$(git branch --no-merged | grep -v master | grep -v development | xargs -L1 git --no-pager log --pretty=tformat:'%Cgreen%d%Creset - %h by %an (%Cblue%ar%Creset)' -1 | wc -l)
+echo ""
+echo -e "###> \033[31m${count//[[:space:]]/} UNMERGED LOCAL BRANCHES\033[0m"
+echo ""
+
+git branch --no-merged | grep -v master | grep -v development | xargs -L1 git --no-pager log --pretty=tformat:'%Cgreen%d%Creset - %h by %an (%Cblue%ar%Creset)' -1
+
+count=$(git branch -r --merged | grep -v master | grep -v development | xargs -L1 git --no-pager log --pretty=tformat:'%Cgreen%d%Creset - %h by %an (%Cblue%ar%Creset)' -1 | wc -l)
+echo ""
+echo -e "###> \033[31m${count//[[:space:]]/} MERGED REMOTE BRANCHES\033[0m"
+echo "" 
+
+git branch -r --merged | grep -v master | grep -v development | xargs -L1 git --no-pager log --pretty=tformat:'%Cgreen%d%Creset - %h by %an (%Cblue%ar%Creset)' -1
+
+count=$(git branch --merged | grep -v master | grep -v development | xargs -L1 git --no-pager log --pretty=tformat:'%Cgreen%d%Creset - %h by %an (%Cblue%ar%Creset)' -1 | wc -l)
+echo ""
+echo -e "###> \033[31m${count//[[:space:]]/} MERGED LOCAL BRANCHES\033[0m"
+echo ""
+
+git branch --merged | grep -v master | grep -v development | xargs -L1 git --no-pager log --pretty=tformat:'%Cgreen%d%Creset - %h by %an (%Cblue%ar%Creset)' -1
+
+echo "" 
