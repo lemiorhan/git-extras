@@ -1,0 +1,44 @@
+#!/usr/bin/env zsh
+source git-kata-functions
+
+##############################
+##### SETUP
+##############################
+
+title "setup"
+setup
+create_upstream
+
+##############################
+##### USER 1
+##############################
+
+title "User Tesla"
+create_user tesla
+initial_commit tesla
+
+commit tesla "feature" "settings.xml" "adds configuration of the project"
+commit tesla "feature" "procfile" "adds heroku settings to bootup with correct server configs"
+commit tesla "master" "readme" "creates an initial readme to add proper documentation"
+commit tesla "master" ".gitignore" "adds initial gitignore file to ignore irrelevant files from git"
+push tesla "feature"
+push tesla "master"
+display_log tesla
+
+##############################
+##### USER 2
+##############################
+
+title "User Edison"
+create_user edison
+pull edison
+display_log edison
+
+##############################
+##### UPSTREAM
+##############################
+
+title "Upstream"
+display_log_upstream
+
+it_is_done
