@@ -2,42 +2,31 @@
 
 number=
 root=
+upstream=
+
+function switch_branch() {
+  local exists=`git show-ref refs/heads/$1`
+  if [ ! -n "$exists" ]; then
+      git branch $1
+      echo "New $1 branch created"
+  fi
+  git checkout $1
+}
 
 function commit() {
     sleep 1
-    goto_user $1
-    local exists=`git show-ref refs/heads/$2`
-    if [ ! -n "$exists" ]; then
-        git branch $2
-        echo "New $2 branch created"
-    fi
-    checkout $1 $2
-    echo "$4" >> $3
-    git add $3
-    git commit -m $4 >/dev/null 2>&1
-    echo "$2 > commit created having \"$3\" file for user $1"
+    echo "$2" >> $1
+    git add $1
+    git commit -m $2
 }
 
 function initial_commit() {
-    goto_user $1
     echo "initial commit" >> file
     git add file
-    git commit -m "initial commit" >/dev/null 2>&1
-    echo "master > Initial commit created for user $1"
-}
-
-function checkout() {
-    goto_user $1
-    git checkout $2 >/dev/null 2>&1
-}
-
-function goto_user {
-    cd "$root/repo/user_$1.git"
+    git commit -m "initial commit"
 }
 
 function display_log() {
-    goto_user $1
-    checkout $1 "master"
     log "$root/repo/user_$1.git"
 }
 
@@ -60,7 +49,7 @@ function setup() {
 
     if [ -d "$DIRECTORY" ]
     then
-        rm -rf git-kata/
+        rm -rf git-kata-directory/
         echo "$DIRECTORY folder exists. Deleted."
     fi
     mkdir -p "$DIRECTORY"
@@ -75,37 +64,21 @@ function create_upstream() {
     cd "$root/server/upstream.git"
     git init --bare > /dev/null 2>&1
     echo "Upstream repository created"
+    upstream=true
 }
 
-function create_user() {
-    mkdir -p "$root/repo/user_$1.git" > /dev/null 2>&1
-    goto_user $1
-    git init
-    git config user.name "User ${1}"
-    git config user.email "user_${1}@git.kata"
-    git remote add origin "file://$root/server/upstream.git"
-}
-
-function push() {
-    goto_user $1
-    git push -u origin $2 >/dev/null 2>&1
-    echo "Pushed commits to \"$2\" branch of upstream for user $1"
-}
-
-function pull() {
-    goto_user $1
-    git pull >/dev/null 2>&1
-    echo "Pulled commits from upstream for user $1"
-}
-
-function title() {
-    echo ""
-    echo "###############################################"
-    echo "###### $1"
-    echo "###############################################"
-    echo ""
-}
-
-function it_is_done() {
-    echo "\nIt is done!\n"
+function switch_user() {
+    if [ ! -d "$root/repo/user_$1.git" ]
+    then
+        mkdir -p "$root/repo/user_$1.git"
+        cd "$root/repo/user_$1.git"
+        git init
+        git config user.name "User ${1}"
+        git config user.email "user_${1}@git.kata"
+        if [ -n "$upstream" ]; then
+            git remote add origin "file://$root/server/upstream.git"
+        fi
+    else
+        cd "$root/repo/user_$1.git"
+    fi
 }
