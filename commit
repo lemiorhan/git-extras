@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -e
+
+function getFileName() {
+    randomNumber=$(( ( RANDOM % 100 ) + 1 ))
+    file="file$randomNumber"
+    echo $file
+}
+
+filename=$1
+
+if [ -z "$filename" ]; then
+  filename=$(getFileName)
+fi
+
+if [ -f "$filename" ]; then
+  echo "File $filename already exists"
+  exit 0
+fi
+
+touch $filename
+git add $filename
+git commit -m "creates $filename"
