@@ -44,6 +44,9 @@ git config --global alias.t "tag -l"
 # Combines git add all and git commit in one command
 git config --global alias.ac '!git add -A && git commit'
 
+# sychronize master branch without checking in it
+git config --global alias.master 'fetch origin master:master'
+
 # Shows diff between the version in working copy and the object database
 git config --global alias.d "difftool"
 
