@@ -86,6 +86,9 @@ git config --global alias.ref "log -g --pretty=format:'%C(yellow)%h%Creset %gD: 
 # And keeps it in Index. The commit message of your last commit is also re-used in your next commit.
 git config --global alias.amend "commit --amend -C HEAD"
 
+# push new branch without setting a branch name to the upstream
+git config --global alias.pnb "push -u origin HEAD"
+
 # Displays the content of your given commit
 # Usage: git showco COMMIT_ID
 git config --global alias.showco "!git --no-pager show --stat --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
