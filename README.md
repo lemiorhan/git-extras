@@ -1,4 +1,5 @@
 <a name="top"/>
+
 # Git-Extras
 
 The best way of learning Git is practicing it. While practicing, it is beneficial to monitor the index, the status,
@@ -44,6 +45,7 @@ Just clone this repository to a folder (e.g. `/usr/local/bin`) which is in the l
 ## Usage
 
 <a name="git-config-sample"/>
+
 #### git-config-sample
 
 ```
@@ -72,6 +74,7 @@ DISCUSSIONS
 [Go to top](#top)
 
 <a name="git-find-repos"/>
+
 #### git-find-repos
 
 ```
@@ -125,6 +128,7 @@ DISCUSSIONS
 [Go to top](#top)
 
 <a name="git-generate-changes"/>
+
 #### git-generate-changes
 
 ```
@@ -180,6 +184,7 @@ DISCUSSIONS
 [Go to top](#top)
 
 <a name="git-wtf"/>
+
 #### git-wtf
 
 ```
@@ -230,6 +235,7 @@ DISCUSSIONS
 [Go to top](#top)
 
 <a name="gitanalyzer"/>
+
 #### gitanalyzer
 
 ```
@@ -284,6 +290,7 @@ DISCUSSIONS
 [Go to top](#top)
 
 <a name="git-practice-platform"/>
+
 #### git-practice-platform
 
 ```
@@ -354,6 +361,7 @@ DISCUSSIONS
 [Go to top](#top)
 
 <a name="live-findfiles"/>
+
 #### live-findfiles
 
 ```
@@ -389,6 +397,7 @@ DISCUSSIONS
 [Go to top](#top)
 
 <a name="gitcatfile"/>
+
 #### gitcatfile
 
 ```
@@ -436,6 +445,7 @@ DISCUSSIONS
 [Go to top](#top)
 
 <a name="live-git-index"/>
+
 #### live-git-index
 
 ```
@@ -485,6 +495,7 @@ DISCUSSIONS
 [Go to top](#top)
 
 <a name="live-git-log"/>
+
 #### live-git-log
 
 ```
@@ -516,6 +527,7 @@ DISCUSSIONS
 [Go to top](#top)
 
 <a name="live-git-reflog"/>
+
 #### live-git-reflog
 
 ```
@@ -547,6 +559,7 @@ DISCUSSIONS
 [Go to top](#top)
 
 <a name="live-git-status"/>
+
 #### live-git-status
 
 ```
@@ -570,6 +583,7 @@ DISCUSSIONS
 [Go to top](#top)
 
 <a name="live-tree"/>
+
 #### live-tree
 
 ```
